@@ -189,16 +189,4 @@ const { developmentChains } = require("../helper-hardhat-config")
                 await expect((await nftMarketplace.withdraw())).to.emit(nftMarketplace,"withdrawSuccess")
             })
         })
-        
-/*
-	
-5. withdraw:
-	- `il prezzo è 0` 
-            => revert NFT_marketplace__invalidNFT()
-	- `NFT eliminato` 
-            => l'NFT viene eliminato, quindi cercando il prezzo (getNFTPrice()) e/o l'owner (getNFTLister()) => revert
-
-	- `saldo 0`: 
-            a seguito di un prelievo soldi sul contratto = 0         
-        */
     })
