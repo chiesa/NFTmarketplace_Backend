@@ -25,10 +25,9 @@ contract NFTmarketplace{
     mapping (address => uint) internal s_credit;
 
     /* ---- eventi ---*/
-    event NFTlisted(address _NFTContract, uint _tokenId, uint _price);
-    event NFTSold(address from , address to, uint _tokenId);
-    event listDeleted(address _NFTContract, uint _tokenId);
-    event listingUpdate(address _NFTContract, uint _tokenId, uint _price);
+    event NFTlisted(address _NFTContract, uint _tokenId, uint _price, address seller);
+    event NFTSold(address from , address to, uint _tokenId, address _nftAddress);
+    event listDeleted(address _NFTContract, uint _tokenId, address seller);
     event withdrawSuccess(address _to, uint amount);
 
     /* ---- modifier ---*/
@@ -115,7 +114,7 @@ contract NFTmarketplace{
         // listing
         s_listing[_NFTContract][_tokenId] = SingleNFT(msg.sender, _price);
         // event
-        emit NFTlisted( _NFTContract, _tokenId, _price );
+        emit NFTlisted( _NFTContract, _tokenId, _price, msg.sender);
     }
 
     function buyItem(address _NFTContract, uint _tokenId) external payable
@@ -143,7 +142,7 @@ contract NFTmarketplace{
         // NFT safe transfert
         nft.safeTransferFrom(NFTowner,msg.sender,_tokenId);
         // emit
-        emit NFTSold(NFTowner,msg.sender,_tokenId);
+        emit NFTSold(NFTowner,msg.sender,_tokenId,_NFTContract);
     }
 
     function deleteListing(address _NFTContract, uint _tokenId) external 
@@ -154,7 +153,7 @@ contract NFTmarketplace{
         // delete listed
         delete(s_listing[_NFTContract][_tokenId]);
         // emit
-        emit listDeleted( _NFTContract, _tokenId);
+        emit listDeleted( _NFTContract, _tokenId, msg.sender);
     }
 
     function updateListing(address _NFTContract, uint _tokenId, uint _price) external 
@@ -171,7 +170,7 @@ contract NFTmarketplace{
         s_listing[_NFTContract][_tokenId].price = _price;
 
         //emit
-        emit listingUpdate( _NFTContract, _tokenId, _price);
+        emit NFTlisted( _NFTContract, _tokenId, _price,msg.sender);
 
     }
 

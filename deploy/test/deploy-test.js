@@ -15,13 +15,17 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         log: true,
         waitConfirmations: network.config.blockConfirmations || 1,
     })
+
+    /*
     const BasicNFT2 = await deploy("BasicNFT2", {
         from: deployer,
         args: arguments,
         log: true,
         waitConfirmations: network.config.blockConfirmations || 1,
     })
+    */
 
+    console.log(BasicNFT1.address)
     // Verify the deployment
     if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         log("Verifying...")

@@ -28,7 +28,7 @@ contract BasicNFT1 is ERC721{
 
 }
 
-
+/*
 contract BasicNFT2 is ERC721{
     string public constant TOKEN_URI = "https://ipfs.io/ipfs/bafybeieoy22lqbdbrhcqziqqn5efsohte4u4g2lidz3cvecfl3yy2j3peu";
     uint256 private tokenId;
@@ -42,7 +42,7 @@ contract BasicNFT2 is ERC721{
         return tokenId;
     }
 
-    function tokenURI(uint256 /*_tokenId*/) public view override returns(string memory) {
+    function tokenURI(uint256 _tokenId) public view override returns(string memory) {
         // require(_exists(tokenId))
         return TOKEN_URI;
     }
@@ -50,4 +50,5 @@ contract BasicNFT2 is ERC721{
     function getTokenCounter() public view returns(uint256){
         return tokenId;
     }
-}
+
+}*/
